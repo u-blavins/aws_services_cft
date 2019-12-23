@@ -1,0 +1,102 @@
+{
+    "S3BucketTemplate": {
+        "Type": "AWS::S3::Bucket",
+        "Properties": {
+            "AccelerateConfiguration": {
+                "AccelerationStatus": "Enabled | Suspended"
+            },
+            "AccessControl": "private | public-read | public-read-write | aws-exec-read | authenticated-read | bucket-owner-read | bucket-owner-full-control | log-delivery-write",
+            "AnalyticsConfiguration": {
+                "Id": "AnalyticsConfigurationID",
+                "Prefix": "Prefix that object must have to be included",
+                "StorageClassAnalysis": {
+                    "DataExport": {
+                       "Destination": {
+                           "BucketAccountId": "Account ID of destination bucket",
+                           "BucketArn": "Arn of bucket to export to",
+                           "Format": "File format",
+                           "Prefix": "Prefix for exporting"
+                       },
+                       "OutputSchemaVersion": "V_1 - Must be this"
+                    }
+                },
+                "TagFilters": [
+                    {
+                        "Key": "key",
+                        "Value": "value"
+                    }
+                ]
+            },
+            "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                    {
+                        "ServerSideEncryptionByDefault": {
+                            "SSEAlgorithm": "AES256 | aws:kms",
+                            "KMSMasterKeyID": "ID of KMS Key if aws:kms selected"
+                        }
+                    }
+                ]
+            },
+            "BucketName": "Name of bucket",
+            "CorsConfiguration": {
+                "CorsRules": [
+                    {
+                        "AllowedHeaders": [
+                            "Headers specified in Access-Control-Request-Headers"
+                        ],
+                        "AllowedMethods": [
+                            "GET", "PUT", "HEAD", "POST", "DELETE"
+                        ],
+                        "AllowedOrigins": [
+                            "Specify origins wanted for cross-domain requests from"
+                        ],
+                        "ExposedHeaders": [
+                            "header in response that customers are able to access from apps"
+                        ],
+                        "Id": "CORS Rule Id",
+                        "MaxAge": "Time in seconds for browser to cache response"
+                    }
+                ]
+            },
+            "InventoryConfigurations": [
+                {
+                    "Destination": {
+                        "BucketAccountId": "Account ID of destination bucket",
+                        "BucketArn": "Arn of bucket to export to",
+                        "Format": "File format",
+                        "Prefix": "Prefix for exporting"
+                    },
+                    "Enabled": "True | False",
+                    "Id": "Inventory Configuration ID",
+                    "IncludedObjectVersions": "All | Current",
+                    "OptionalFields": [
+                        "Size | LastModifiedDate | StorageClass | ETag | ",
+                        "IsMultipartUploaded | ReplicationStatus | EncryptionStatus ",
+                        "| ObjectLockRetainUntilDate | ObjectLockMode |",
+                        " ObjectLockLegalHoldStatus | IntelligentTieringAccessTier"
+                    ],
+                    "Prefix": "Prefix prepended to inventory results",
+                    "ScheduleFrequency": "Daily | Weekly"
+                }
+            ],
+            "LifecycleConfiguration": {
+                "Rules": [
+                    {
+                        "AbortIncompleteMultipartUpload" : AbortIncompleteMultipartUpload,
+                        "ExpirationDate" : Timestamp,
+                        "ExpirationInDays" : Integer,
+                        "Id" : String,
+                        "NoncurrentVersionExpirationInDays" : Integer,
+                        "NoncurrentVersionTransition" : NoncurrentVersionTransition,
+                        "NoncurrentVersionTransitions" : [ NoncurrentVersionTransition, ... ],
+                        "Prefix" : String,
+                        "Status" : String,
+                        "TagFilters" : [ TagFilter, ... ],
+                        "Transition" : Transition,
+                        "Transitions" : [ Transition, ... ]
+                    }
+                ]
+            }
+        }
+    }
+}
