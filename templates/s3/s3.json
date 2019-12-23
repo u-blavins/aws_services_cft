@@ -210,7 +210,49 @@
                 "Rules": [
                     {
                         "Destination": {
-                            
+                            "AccessControlTranslation": {
+                                "Owner": "Replica ownership"
+                            }
+                        },
+                        "Id": "Replication Rule Id",
+                        "Prefix": "Object Key name prefix",
+                        "SourceSelectionCriteria": {
+                            "SseKmsEncryptedObjects": {
+                                "Status": "Enabled | Disabled - is objects created with sse using a CMK in KMS"
+                            }
+                        },
+                        "Status": "Enabled | Disabled"
+                    }
+                ]
+            },
+            "Tags": [
+                {
+                    "Key": "key",
+                    "Value": "value"
+                }
+            ],
+            "VersionConfiguration": {
+                "Status":"Enabled | Suspended"
+            },
+            "WebsiteConfiguration": {
+                "ErrorDocument": "Name of error document",
+                "IndexDocument": "Name of index document",
+                "RedirectAllRequestsTo": {
+                    "HostName": "Name of host where requests are redirected",
+                    "Protocol": "http | https"
+                },
+                "RoutingRules": [
+                    {
+                        "RedirectRules": {
+                            "HostName": "Host name to use redirect request",
+                            "HttpRedirectCode": "HTTP redirect code to use on response",
+                            "Protocol": "http | https",
+                            "ReplaceKeyPrefixWith": "Object key prefix to use in redirect request",
+                            "ReplaceKeyWith": "Object key to use in redirect request"
+                        },
+                        "RoutingRuleCondition": {
+                            "HttpErrorCodeReturnsEquals": "HTTP Error code when redirect applied",
+                            "KeyPrefixEquals": "Object key name prefix when redirect applied"
                         }
                     }
                 ]
