@@ -14,7 +14,7 @@
                        "Destination": {
                            "BucketAccountId": "Account ID of destination bucket",
                            "BucketArn": "Arn of bucket to export to",
-                           "Format": "File format",
+                           "Format": "CSV",
                            "Prefix": "Prefix for exporting"
                        },
                        "OutputSchemaVersion": "V_1 - Must be this"
@@ -63,7 +63,7 @@
                     "Destination": {
                         "BucketAccountId": "Account ID of destination bucket",
                         "BucketArn": "Arn of bucket to export to",
-                        "Format": "File format",
+                        "Format": "CSV",
                         "Prefix": "Prefix for exporting"
                     },
                     "Enabled": "True | False",
@@ -168,7 +168,7 @@
                                 ]
                             }
                         },
-                        "Function": "arn of sqs queue"
+                        "Queue": "arn of sqs queue"
                     }
                 ],
                 "TopicConfigurations": [
@@ -184,7 +184,7 @@
                                 ]
                             }
                         },
-                        "Function": "arn of sns topic"
+                        "Topic": "arn of sns topic"
                     }
                 ]
             },
