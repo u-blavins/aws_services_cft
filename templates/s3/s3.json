@@ -82,18 +82,136 @@
             "LifecycleConfiguration": {
                 "Rules": [
                     {
-                        "AbortIncompleteMultipartUpload" : AbortIncompleteMultipartUpload,
-                        "ExpirationDate" : Timestamp,
-                        "ExpirationInDays" : Integer,
-                        "Id" : String,
-                        "NoncurrentVersionExpirationInDays" : Integer,
-                        "NoncurrentVersionTransition" : NoncurrentVersionTransition,
-                        "NoncurrentVersionTransitions" : [ NoncurrentVersionTransition, ... ],
-                        "Prefix" : String,
-                        "Status" : String,
-                        "TagFilters" : [ TagFilter, ... ],
-                        "Transition" : Transition,
-                        "Transitions" : [ Transition, ... ]
+                        "AbortIncompleteMultipartUpload" : {
+                            "DaysAfterInitiation": "Integer of days which S3 aborts incomplete mp upload"
+                        },
+                        "ExpirationDate" : "Timestamp when objects deleted from S3 - ISO 8601",
+                        "ExpirationInDays" : "Integer days after creation when objects deleted",
+                        "Id" : "Rule ID",
+                        "NoncurrentVersionExpirationInDays" : "Integer same as current but for versioned objects",
+                        "NoncurrentVersionTransition" : {
+                            "StorageClass": "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA",
+                            "TransistionInDays": "Integer days before S3 performs transistion to Storage Class"
+                        },
+                        "NoncurrentVersionTransitions" : [
+                            {
+                                "StorageClass": "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA",
+                                "TransistionInDays": "Integer days before S3 performs transistion to Storage Class"
+                            }
+                        ],
+                        "Prefix" : "Object key prefix that identifies one or more objects",
+                        "Status" : "Enabled | Disabled",
+                        "TagFilters" : [
+                            {
+                                "Key": "key",
+                                "Value": "value"
+                            }
+                        ],
+                        "Transition" : {
+                            "StorageClass" : "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA",
+                            "TransitionDate" : "Timestamp S3 performs transistion to Storage Clas",
+                            "TransitionInDays" :  "Integer days before S3 performs transistion to Storage Class"
+                        },
+                        "Transitions" : [
+                            {
+                                "StorageClass" : "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA",
+                                "TransitionDate" : "Timestamp S3 performs transistion to Storage Clas",
+                                "TransitionInDays" :  "Integer days before S3 performs transistion to Storage Class"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "LoggingConfiguration": {
+                "DestinationBucketName": "Name of bucket where S3 stores access log files",
+                "LogFilePrefix": "Prefix for all log object keys"
+            },
+            "MetricsConfigurations": [
+                {
+                    "Id": "Metric configuration ID",
+                    "Prefix": "Prefix that object must have to be included for metrics",
+                    "TagFilters": [
+                        {
+                            "Key": "key",
+                            "Value": "value"
+                        }
+                    ]
+                }
+            ],
+            "NotificationConfiguration": {
+                "LambdaConfigurations": [
+                    {
+                        "Event": "Bucket event to invoke lambda",
+                        "Filter": {
+                            "S3Key": {
+                                "Rules": [
+                                    {
+                                        "Name": "prefix | suffix",
+                                        "Value": "filter search value for object key names"
+                                    }
+                                ]
+                            }
+                        },
+                        "Function": "arn of lambda function to call"
+                    }
+                ],
+                "QueueConfigurations": [
+                    {
+                        "Event": "Bucket event to publish message to queue",
+                        "Filter": {
+                            "S3Key": {
+                                "Rules": [
+                                    {
+                                        "Name": "prefix | suffix",
+                                        "Value": "filter search value for object key names"
+                                    }
+                                ]
+                            }
+                        },
+                        "Function": "arn of sqs queue"
+                    }
+                ],
+                "TopicConfigurations": [
+                    {
+                        "Event": "Bucket event to send notification to topic",
+                        "Filter": {
+                            "S3Key": {
+                                "Rules": [
+                                    {
+                                        "Name": "prefix | suffix",
+                                        "Value": "filter search value for object key names"
+                                    }
+                                ]
+                            }
+                        },
+                        "Function": "arn of sns topic"
+                    }
+                ]
+            },
+            "ObjectLockConfiguration": {
+                "ObjectLockEnabled": "Enabled - or not included if no object lock",
+                "Rule": {
+                    "DefaultRetention": {
+                        "Days": "Integer days for default retention",
+                        "Mode": "COMPLIANCE | GOVERNANCE - retention mode GOV - object lock can be removed",
+                        "Years": "Integer years for default retention"
+                    }
+                }
+            },
+            "ObjectLockEnabled": "Enabled - if configuration present",
+            "PublicAccessConfiguration": {  
+                "BlockPublicAcls" : "True | False - True for block",
+                "BlockPublicPolicy" : "True | False - True for block",
+                "IgnorePublicAcls" : "True | False - True for block",
+                "RestrictPublicBuckets" : "True | False - True for block"
+            },
+            "ReplicationConfiguration": {
+                "Role": "arn of IAM role",
+                "Rules": [
+                    {
+                        "Destination": {
+                            
+                        }
                     }
                 ]
             }
