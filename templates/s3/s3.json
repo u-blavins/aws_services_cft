@@ -212,7 +212,13 @@
                         "Destination": {
                             "AccessControlTranslation": {
                                 "Owner": "Replica ownership"
-                            }
+                            },
+                            "Account": "Destination bucket owner account ID",
+                            "Bucket": "arn of bucket to replicate to",
+                            "EncryptionConfiguration": {
+                                "ReplicaKmsKeyID": "key used for encrypting replica objects"
+                            },
+                            "StorageClass": "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | REDUCED_REDUNDANCY | STANDARD | STANDARD_IA"
                         },
                         "Id": "Replication Rule Id",
                         "Prefix": "Object Key name prefix",
