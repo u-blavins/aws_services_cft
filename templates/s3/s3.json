@@ -5,7 +5,7 @@
             "AccelerateConfiguration": {
                 "AccelerationStatus": "Enabled | Suspended"
             },
-            "AccessControl": "private | public-read | public-read-write | aws-exec-read | authenticated-read | bucket-owner-read | bucket-owner-full-control | log-delivery-write",
+            "AccessControl": "Private | PublicRead | PublicReadWrite | AwsExecRead | AuthenticatedRead | BucketOwnerRead | BucketOwnerFullControl | LogDeliveryWrite",
             "AnalyticsConfiguration": {
                 "Id": "AnalyticsConfigurationID",
                 "Prefix": "Prefix that object must have to be included",
@@ -91,12 +91,12 @@
                         "NoncurrentVersionExpirationInDays" : "Integer same as current but for versioned objects",
                         "NoncurrentVersionTransition" : {
                             "StorageClass": "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA",
-                            "TransistionInDays": "Integer days before S3 performs transistion to Storage Class"
+                            "TransitionInDays": "Integer days before S3 performs transistion to Storage Class"
                         },
                         "NoncurrentVersionTransitions" : [
                             {
                                 "StorageClass": "DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA",
-                                "TransistionInDays": "Integer days before S3 performs transistion to Storage Class"
+                                "TransitionInDays": "Integer days before S3 performs transistion to Storage Class"
                             }
                         ],
                         "Prefix" : "Object key prefix that identifies one or more objects",
@@ -199,7 +199,7 @@
                 }
             },
             "ObjectLockEnabled": "Enabled - if configuration present",
-            "PublicAccessConfiguration": {  
+            "PublicAccessBlockConfiguration": {  
                 "BlockPublicAcls" : "True | False - True for block",
                 "BlockPublicPolicy" : "True | False - True for block",
                 "IgnorePublicAcls" : "True | False - True for block",
@@ -237,7 +237,7 @@
                     "Value": "value"
                 }
             ],
-            "VersionConfiguration": {
+            "VersioningConfiguration": {
                 "Status":"Enabled | Suspended"
             },
             "WebsiteConfiguration": {
