@@ -21,3 +21,13 @@ Resources:
         Properties:
             GroupName: !Ref AdminGroup
             Users: [!Ref AdminUser]
+    VirtualMFADevice:
+        Type: AWS::IAM::VirtualMFADevice
+        Properties:
+            Path: /
+            Users: [!Ref AdminUser]
+            VirtualMfaDeviceName: admin-mfa-device
+Outputs:
+    MFADeviceSerialNumber:
+        Description: Serial Number for new MFA Device
+        Value: !Ref VirtualMFADevice
