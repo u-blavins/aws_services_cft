@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudFormation Template for creating Admin IAM Users
+Resources:
+    AdminGroup:
+        Type: AWS::IAM::Group
+        Properties:
+            GroupName: admins
+            Path: /
+            ManagedPolicyArns:
+                - arn:aws:iam::aws:policy/AdministratorAccess
+    AdminUser:
+        Type: AWS::IAM::User
+        Properties:
+            LoginProfile:
+                Password: Ch@n9eM3Pl345e
+                PasswordResetRequired: true
+            Path: /
+            UserName: ublavins-admin
+    Admins:
+        Type: AWS::IAM::UserToGroupAddition
+        Properties:
+            GroupName: !Ref AdminGroup
+            Users: [!Ref AdminUser]
