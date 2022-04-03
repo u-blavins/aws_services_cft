@@ -1,41 +1,41 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: CloudFormation Template for creating Admin IAM Users
+Description: CloudFormation Template for creating an Admin IAM User and Group
 Resources:
-    AdminGroup:
-        Type: AWS::IAM::Group
-        Properties:
-            GroupName: admins
-            Path: /
-            ManagedPolicyArns:
-                - arn:aws:iam::aws:policy/AdministratorAccess
-    AdminUser:
-        Type: AWS::IAM::User
-        Properties:
-            LoginProfile:
-                Password: Ch@n9eM3Pl345e
-                PasswordResetRequired: true
-            Path: /
-            UserName: ublavins-admin
-    Admins:
-        Type: AWS::IAM::UserToGroupAddition
-        Properties:
-            GroupName: !Ref AdminGroup
-            Users: [!Ref AdminUser]
-    AdminAccessKeys:
-        Type: AWS::IAM::AccessKey
-        Properties:
-            Status: Active
-            UserName: !Ref AdminUser
-    VirtualMFADevice:
-        Type: AWS::IAM::VirtualMFADevice
-        Properties:
-            Path: /
-            Users: [!Ref AdminUser]
-            VirtualMfaDeviceName: admin-mfa-device
+  AdminGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: admins
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+  AdminUser:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: Ch@n9eM3Pl345e
+        PasswordResetRequired: true
+      Path: /
+      UserName: admin-user
+  Admins:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: !Ref AdminGroup
+      Users: [!Ref AdminUser]
+  AdminAccessKeys:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Status: Active
+      UserName: !Ref AdminUser
+  VirtualMFADevice:
+    Type: AWS::IAM::VirtualMFADevice
+    Properties:
+      Path: /
+      Users: [!Ref AdminUser]
+      VirtualMfaDeviceName: admin-mfa-device
 Outputs:
-    MFADeviceSerialNumber:
-        Description: Serial Number for new MFA Device
-        Value: !Ref VirtualMFADevice
-    SecretAccessKey:
-        Description: Secret Access Key for user
-        Value: !GetAtt AdminAccessKeys.SecretAccessKey
+  MFADeviceSerialNumber:
+    Description: Serial Number for new MFA Device
+    Value: !Ref VirtualMFADevice
+  SecretAccessKey:
+    Description: Secret Access Key for user
+    Value: !GetAtt AdminAccessKeys.SecretAccessKey
